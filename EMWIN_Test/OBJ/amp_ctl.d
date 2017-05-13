@@ -1,0 +1,17 @@
+..\obj\amp_ctl.o: AMP_CTL.c
+..\obj\amp_ctl.o: AMP_CTL.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
+..\obj\amp_ctl.o: ..\USER\stm32f10x.h
+..\obj\amp_ctl.o: ..\CORE\core_cm3.h
+..\obj\amp_ctl.o: D:\CodeandOthers\MDK\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\amp_ctl.o: ..\USER\system_stm32f10x.h
+..\obj\amp_ctl.o: ..\USER\stm32f10x_conf.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_fsmc.h
+..\obj\amp_ctl.o: ..\USER\stm32f10x.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_gpio.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_spi.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h
+..\obj\amp_ctl.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_dac.h
