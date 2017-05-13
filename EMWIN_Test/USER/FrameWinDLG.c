@@ -157,7 +157,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   
   const char* ERROR = "NULL";
 	
-  static unsigned char Flag = 0;
+//  static unsigned char Flag = 0;
   unsigned char Ready = 0;
   char * errorStr;
   char * buffStr;
@@ -238,39 +238,58 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	//更新测量的峰峰值，若ADS1110无应答则不更新并显示示数为0，或者显示“NULL”
 	//				   若ADS1110应答数据，则更新数据
 	hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_2);
-	if(!Flag)
-	{
-		
-		if(ADS1110_WriteData(CONTINUOUS, RATE_240SPS, PGA_GAIN_1))
-		{	
-			Flag = 0;
-			
-		}	
-		else
-		{	
-			Ready = 1;
-			Flag = 1;
-					
-		}
-	}
 	
-	if(Ready == 1)
-	{
-		Bytes_AD = ADS1110_ReadData();
+	if(ADS1110_ReadData())
+	{	
+		Bytes_AD = ADS1110_ReadData();	
 		Data_Disp = Bytes_AD * 2.048 / ((-1) * 2048 * 1 );
 					
 		if(Data_Disp != EDIT_GetFloatValue(hItem))
 		{
 			EDIT_SetFloatMode(hItem, Data_Disp, 0.0, 5.0, 4, 0);
 			EDIT_SetFloatValue(hItem, Data_Disp);
-		}	
+		}
 	}
 	else
-	{
+		
+	{	
 		errorStr = "NULL";
 		EDIT_SetText(hItem, errorStr);
 		isError = 1;
 	}
+//	if(!Flag)
+//	{
+//		
+//		if(ADS1110_WriteData(CONTINUOUS, RATE_240SPS, PGA_GAIN_1))
+//		{	
+//			Flag = 0;
+//			
+//		}	
+//		else
+//		{	
+//			Ready = 1;
+//			Flag = 1;
+//					
+//		}
+//	}
+//	
+//	if(Ready == 1)
+//	{
+//		Bytes_AD = ADS1110_ReadData();
+//		Data_Disp = Bytes_AD * 2.048 / ((-1) * 2048 * 1 );
+//					
+//		if(Data_Disp != EDIT_GetFloatValue(hItem))
+//		{
+//			EDIT_SetFloatMode(hItem, Data_Disp, 0.0, 5.0, 4, 0);
+//			EDIT_SetFloatValue(hItem, Data_Disp);
+//		}	
+//	}
+//	else
+//	{
+//		errorStr = "NULL";
+//		EDIT_SetText(hItem, errorStr);
+//		isError = 1;
+//	}
 	
 //	TestCounter++;
 //	EDIT_SetDecMode(hItem, TestCounter, 0, 200000, 1, 0);
