@@ -163,7 +163,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   char * buffStr;
 
 	
-   int Bytes_AD = 0;
+   long int Bytes_AD = 0;
   float Data_Disp = 0.0;
 	int Frequence = 0;
   
@@ -235,24 +235,30 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	
 	
 	
+
 	//更新测量的峰峰值，若ADS1110无应答则不更新并显示示数为0，或者显示“NULL”
 	//				   若ADS1110应答数据，则更新数据
 	hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_2);
 	
 	if(ADS1110_ReadData())
 	{	
+//		GPIO_ResetBits(GPIOD, GPIO_Pin_2);
+//		GUI_Delay(300);
+//		GPIO_SetBits(GPIOD, GPIO_Pin_2);
+//		GUI_Delay(300);
 		Bytes_AD = ADS1110_ReadData();	
-		Data_Disp = Bytes_AD * 2.048 / ((-1) * 2048 * 1 );
-					
-		if(Data_Disp != EDIT_GetFloatValue(hItem))
-		{
-			EDIT_SetFloatMode(hItem, Data_Disp, 0.0, 5.0, 4, 0);
-			EDIT_SetFloatValue(hItem, Data_Disp);
-		}
-	}
-	else
+		Data_Disp = Bytes_AD / 1000.0;
 		
+		EDIT_SetDecMode(hItem, Bytes_AD, 0, 2000, 0, 0);
+		EDIT_SetValue(hItem, Bytes_AD);			
+//		EDIT_SetFloatMode(hItem, Data_Disp, 0.0, 5.0, 4, 0);
+//		
+//		EDIT_SetFloatValue(hItem, Data_Disp);
+		
+	}
+	else		
 	{	
+		
 		errorStr = "NULL";
 		EDIT_SetText(hItem, errorStr);
 		isError = 1;
@@ -462,7 +468,7 @@ WM_HWIN CreateFramewin(void) {
   WM_HTIMER hTimer;
 
   hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
-  hTimer = WM_CreateTimer(WM_GetClientWindow(hWin),0,100,0);
+  hTimer = WM_CreateTimer(WM_GetClientWindow(hWin),0,500,0);
 
   return hWin;
 }
