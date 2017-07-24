@@ -17,9 +17,16 @@
 
 #define WRITE		0
 #define	READ		1
+#define	isPLL		numPLL
 
 #include "sys.h"
 #include "delay.h"
+
+static int numPLL = 0;
+
+static uint32_t CFR0;
+static uint32_t CFR1;
+
 
 void Init_AD9953(void);
 void Reset_AD9953(void);

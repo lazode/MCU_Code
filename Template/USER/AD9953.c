@@ -125,8 +125,13 @@ int WriteRead_AD9953(unsigned char WR, unsigned char addr, int data, int dataWid
 *********************************************/
 void WriteFTW_AD9953(int frequence)
 {
-	//int FTW = frequence * 4294967296 / 20000000;
-	int FTW = frequence;	
+	int FTW = frequence * 4294967296 / 20000000;
+	//int FTW = frequence;	
+	
+	if(isPLL)
+	{
+		FTW /= numPLL;
+	}
 	
 	WriteRead_AD9953(WRITE, FTW0_ADDR, FTW, 4);
 	
@@ -148,6 +153,12 @@ void SetPLL_AD9953(int multi)
 	CFR2Word &= ~((32 - 1) << 3);
 	CFR2Word |= multi << 3;
 	//	CFR2Word &= ~(multi << 3);
+	
+	if(multi < 4 || multi > 20)
+		numPLL = 0;
+	else
+		numPLL = multi;
+	
 	
 	WriteRead_AD9953(WRITE, CFR2_ADDR, CFR2Word, 3);
 	HAL_GPIO_WritePin(AD9953_PORT, UPDATE_PIN, GPIO_PIN_RESET);
