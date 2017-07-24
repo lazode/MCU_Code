@@ -4,15 +4,14 @@
 
 #include "AD9953.h"
 #include "ADS822_.h"
+#include "ADS788.h"
+
+#include "exti.h"
 
 void LED_Init(void);
 
 int main(void)
 {
-	
-	int freq = 0;
-	char * s;
-	
 	
     HAL_Init();                     //初始化HAL库    
     Stm32_Clock_Init(360,25,2,8);   //设置时钟,180Mhz
@@ -20,36 +19,35 @@ int main(void)
 	delay_init(180);
 	uart_init(9600);
 	LED_Init();
+	EXTI_Init();
+	
+	Init_ADS788();
 	
 //	ADS822_Init();
-	uint8_t USART_TX_BUF[10];
-	int UART_TX_temp = 0;
+//	uint8_t USART_TX_BUF[10];
+//	int UART_TX_temp = 0;
 	
-	float v = 0.0;
+//	uart_rxTemp.temp = 0;
+	int t = 0;
+//	float v;	
+	
+//	__HAL_UART_ENABLE_IT(&UART1_Handler, UART_IT_IDLE);
+	
+//	Init_ADS788();
 	
 	Init_AD9953();
-	SetPLL_AD9953(10);
+//	SetPLL_AD9953(0);
 	while(1)
 	{
-//		if(freq == 10000)
-//			freq++;
-//		else
-//			freq = 1;
+		
+//		WriteFTW_AD9953(100000);
 
-		scanf("%s", s);
-		printf("%s\n", s);
-		SetPLL_AD9953(10);
-		delay_ms(10);
-		WriteFTW_AD9953(21474837);
-		
-		
-//		UART_TX_temp = Read_ADS822() - 512;
-//		v = (UART_TX_temp /1024) * 2.0;
-//		printf("temp = %d\r\n", UART_TX_temp);
-//		printf("v    = %f\r\n", v);
-		
-//		printf("%d%d%d%d%d%d%d%d%d%d\r\n", D9_PIN, D8_PIN, D7_PIN, D6_PIN, D5_PIN, D4_PIN, D	3_PIN, D2_PIN, D1_PIN, D0_PIN);
-		
+//		t = Read_ADS788();
+//		v = ((float)t / 1024) * 5.0;
+//		
+//		printf("t = %d\n", t);
+//		
+//		printf("v = %f\n", v);
 		delay_us(100);
 			
 		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
@@ -75,4 +73,6 @@ void LED_Init(void)
     HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);	//PB0置1 
     HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_SET);	//PB1置1  
 }
+
+
 
