@@ -2,16 +2,196 @@
 #define	_AD8369_H
 
 #include "sys.h"
+#include "delay.h"
 
 #define	AD8369_PORT	GPIOC
 
-#define	DATAPIN		GPIO_PIN_0
-#define	CLKPIN		GPIO_PIN_1
-#define	DATA_EN		GPIO_PIN_2
+#define	SDA_PIN		GPIO_PIN_6
+#define	SCK_PIN		GPIO_PIN_7
+#define	DATA_EN		GPIO_PIN_8
 
 void Init_AD8369(void);
 void SetGain_AD8369(int gain);
 
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
